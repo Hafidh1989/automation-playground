@@ -27,5 +27,12 @@ class InventoryPage:
 
     def verify_shopping_cart_visible (self):
         expect(self.page.locator(InventoryLocator.SHOPPING_CART_LINK)).to_be_visible()
-        
+    
+    def remove_all_item_from_chart(self):
+        buttons = self.page.get_by_role("button", name="Remove")
+        while buttons.count() > 0:
+            buttons.first.click()
+    
+    def check_if_chart_is_empty(self):
+        assert self.page.locator(InventoryLocator.REMOVE_ITEM_BUTTON).count() == 0, "Cart is not empty"
         

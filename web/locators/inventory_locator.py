@@ -5,3 +5,4 @@ class InventoryLocator:
     SHOPPING_CART_LINK = '[data-test="shopping-cart-link"]'
     SHOPPING_CART_BADGE = '[data-test="shopping-cart-badge"]'
     CHECKOUT_BUTTON = '[data-test="checkout"]'
+    REMOVE_ITEM_BUTTON = '[data-test="remove-sauce-labs-bike-light"]'

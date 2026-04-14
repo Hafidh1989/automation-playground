@@ -1,5 +1,5 @@
 from web.locators.checkout_locator import CheckoutLocator
-
+from playwright.sync_api import expect
 
 class CheckoutPage:
     def __init__(self, page):
@@ -18,3 +18,9 @@ class CheckoutPage:
 
     def get_success_message(self) -> str:
         return self.page.locator(CheckoutLocator.COMPLETE_HEADER).inner_text()
+    
+    def get_inventory_names(self) -> list[str]:
+        return self.page.locator(CheckoutLocator.INVENTORY_ITEM_NAME).all_inner_texts()
+    
+    def verify_error_message_visible(self, message: str):
+        expect(self.page.get_by_text(message)).to_be_visible()

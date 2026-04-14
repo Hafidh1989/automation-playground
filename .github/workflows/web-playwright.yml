@@ -11,6 +11,7 @@ on:
         options:
           - "E2E Testing"
           - "Login Scenario"
+          - "Checkout Scenario"
           - "Run All Available Testing"
 
 jobs:
@@ -48,6 +49,8 @@ jobs:
             TEST_TARGET="web/tests/test_login_scenario.py"
           elif [ "${{ github.event.inputs.test_suite }}" = "Run All Available Testing" ]; then
             TEST_TARGET="web/tests"
+          elif [ "${{ github.event.inputs.test_suite }}" = "Checkout Scenario" ]; then
+            TEST_TARGET="web/tests/test_checkout.py"
           else
             echo "Invalid test suite selected"
             exit 1

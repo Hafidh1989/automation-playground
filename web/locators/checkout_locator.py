@@ -6,3 +6,4 @@ class CheckoutLocator:
     FINISH_BUTTON = '[data-test="finish"]'
     COMPLETE_HEADER = '[data-test="complete-header"]'
     SHOPPING_CHART = '[data-test="shopping-cart-link"]'
+    INVENTORY_ITEMS_NAME = '[data-test="inventory-item-name"]'
