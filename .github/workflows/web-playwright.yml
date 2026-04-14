@@ -3,15 +3,6 @@ name: Web Playwright Tests
 on:
   workflow_dispatch:
     inputs:
-      headless:
-        description: "Run tests in headless mode"
-        required: true
-        default: "true"
-        type: choice
-        options:
-          - "true"
-          - "false"
-
       test_suite:
         description: "Select test suite to run"
         required: true
@@ -24,7 +15,10 @@ on:
 
 jobs:
   web-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+
+    env:
+      HEADLESS: true   # 🔥 paksa headless di CI
 
     steps:
       - name: Checkout repository
@@ -42,7 +36,7 @@ jobs:
 
       - name: Install Playwright browsers
         run: |
-          playwright install --with-deps chromium
+          python -m playwright install chromium
 
       - name: Run pytest
         run: |
@@ -59,11 +53,7 @@ jobs:
             exit 1
           fi
 
-          if [ "${{ github.event.inputs.headless }}" = "true" ]; then
-            pytest -v "$TEST_TARGET" --headless --html=reports/report.html --self-contained-html
-          else
-            pytest -v "$TEST_TARGET" --html=reports/report.html --self-contained-html
-          fi
+          pytest -v "$TEST_TARGET" --html=reports/report.html --self-contained-html
 
       - name: Upload pytest html report
         if: always()
