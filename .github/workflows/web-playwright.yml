@@ -1,0 +1,74 @@
+name: Web Playwright Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      headless:
+        description: "Run tests in headless mode"
+        required: true
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+
+      test_suite:
+        description: "Select test suite to run"
+        required: true
+        default: "Run All Available Testing"
+        type: choice
+        options:
+          - "E2E Testing"
+          - "Login Scenario"
+          - "Run All Available Testing"
+
+jobs:
+  web-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Playwright browsers
+        run: |
+          playwright install --with-deps chromium
+
+      - name: Run pytest
+        run: |
+          mkdir -p reports
+
+          if [ "${{ github.event.inputs.test_suite }}" = "E2E Testing" ]; then
+            TEST_TARGET="web/tests/test_checkout_e2e.py"
+          elif [ "${{ github.event.inputs.test_suite }}" = "Login Scenario" ]; then
+            TEST_TARGET="web/tests/test_login_scenario.py"
+          elif [ "${{ github.event.inputs.test_suite }}" = "Run All Available Testing" ]; then
+            TEST_TARGET="web/tests"
+          else
+            echo "Invalid test suite selected"
+            exit 1
+          fi
+
+          if [ "${{ github.event.inputs.headless }}" = "true" ]; then
+            pytest -v "$TEST_TARGET" --headless --html=reports/report.html --self-contained-html
+          else
+            pytest -v "$TEST_TARGET" --html=reports/report.html --self-contained-html
+          fi
+
+      - name: Upload pytest html report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-html-report
+          path: reports/report.html
+          if-no-files-found: ignore
