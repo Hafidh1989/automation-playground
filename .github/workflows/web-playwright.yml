@@ -24,7 +24,7 @@ on:
 
 jobs:
   web-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout repository
@@ -42,7 +42,7 @@ jobs:
 
       - name: Install Playwright browsers
         run: |
-          playwright install --with-deps chromium
+          python -m playwright install chromium
 
       - name: Run pytest
         run: |
