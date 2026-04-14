@@ -7,6 +7,14 @@ from web.pages.checkout_page import CheckoutPage
 
 BASE_URL = "https://www.saucedemo.com"
 
+def pytest_addoption(parser):
+    parser.addoption(
+        "--headless",
+        action="store_true",
+        default=False,
+        help="Run browser in headless mode"
+    )
+
 
 @pytest.fixture(scope="session")
 def playwright_instance():
@@ -15,15 +23,22 @@ def playwright_instance():
 
 
 @pytest.fixture(scope="session")
-def browser(playwright_instance):
-    browser = playwright_instance.chromium.launch(headless=True)
+def browser(playwright_instance, request):
+    headless = request.config.getoption("--headless")
+
+    browser = playwright_instance.chromium.launch(
+        headless=headless,
+        args=["--start-maximized"]
+    )
     yield browser
     browser.close()
 
 
 @pytest.fixture(scope="function")
 def page(browser):
-    context = browser.new_context(viewport={"width": 1920, "height": 1080})
+    context = browser.new_context(
+        viewport={"width": 1920, "height": 1080}
+    )
     page = context.new_page()
     page.goto(BASE_URL)
     yield page
