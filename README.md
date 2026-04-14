@@ -33,6 +33,8 @@ This repository is designed to demonstrate automation coverage for:
   - Cross-page navigation
   - Assertions for functional behavior
 
+  ▶️ [Run tests via GitHub Actions](https://github.com/Hafidh1989/automation-playground/actions/workflows/web-playwright.yml)
+
 - **Mobile testing**
   - Android app automation
   - UI interaction testing
