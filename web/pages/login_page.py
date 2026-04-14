@@ -21,3 +21,4 @@ class LoginPage:
 
     def get_error_message(self) -> str:
         return self.page.locator(LoginLocator.ERROR_MESSAGE).inner_text()
+    
