@@ -1,11 +1,12 @@
+import os
 import pytest
 from playwright.sync_api import sync_playwright
 from web.pages.login_page import LoginPage
 from web.pages.inventory_page import InventoryPage
 from web.pages.checkout_page import CheckoutPage
 
-
 BASE_URL = "https://www.saucedemo.com"
+
 
 def pytest_addoption(parser):
     parser.addoption(
@@ -24,7 +25,10 @@ def playwright_instance():
 
 @pytest.fixture(scope="session")
 def browser(playwright_instance, request):
-    headless = request.config.getoption("--headless")
+    cli_headless = request.config.getoption("--headless")
+    env_headless = os.getenv("HEADLESS", "false").lower() == "true"
+
+    headless = cli_headless or env_headless
 
     browser = playwright_instance.chromium.launch(
         headless=headless,
@@ -53,6 +57,7 @@ def login_page(page):
 @pytest.fixture
 def inventory_page(page):
     return InventoryPage(page)
+
 
 @pytest.fixture
 def checkout_page(page):
