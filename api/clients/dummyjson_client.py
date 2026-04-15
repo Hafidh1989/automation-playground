@@ -32,3 +32,18 @@ class DummyJsonClient:
             headers=self.default_headers,
             timeout=30,
         )
+    
+    def get_product_list(self, limit: int = 30, skip: int = 0) -> requests.Response:
+        return requests.get(
+            f"{self.base_url}/products",
+            params={"limit": limit, "skip": skip},
+            headers=self.default_headers,
+            timeout=30,
+        )
+    
+    def get_product_detail(self, product_id) -> requests.Response:
+        return requests.get(
+            f"{self.base_url}/products/{product_id}",
+            headers=self.default_headers,
+            timeout=30,
+        )
