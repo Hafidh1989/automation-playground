@@ -1,4 +1,4 @@
-from web.datas.user_data import STANDARD_USER
+from web.data.user_data import STANDARD_USER
 
 
 def test_user_can_complete_checkout(login_page, inventory_page, checkout_page):

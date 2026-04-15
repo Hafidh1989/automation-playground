@@ -1,4 +1,4 @@
-from web.datas.user_data import *
+from web.data.user_data import *
 
 
 def test_invalid_login_credential(login_page):

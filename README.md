@@ -1,4 +1,3 @@
-
 # automation-playground
 
 A unified Python-based test automation portfolio covering **API**, **Web**, and **Mobile** testing.
@@ -12,14 +11,14 @@ This repository showcases end-to-end automation skills across multiple platforms
 - **Web Automation:** Playwright
 - **Mobile Automation:** Appium
 - **Test Runner:** Pytest
-- **Reporting:** Allure 
+- **Reporting:** Pytest HTML (GitHub Actions)
 - **CI/CD:** GitHub Actions
 
 ## Project Scope
 
 This repository is designed to demonstrate automation coverage for:
 
-- **API testing**
+- **API testing** *(in progress)*
   - Endpoint validation
   - Response schema validation
   - Authentication flows
@@ -31,11 +30,11 @@ This repository is designed to demonstrate automation coverage for:
   - End-to-end user flows
   - Form validation
   - Cross-page navigation
-  - Assertions for functional behavior
+  - Functional assertions
 
   ▶️ [Run tests via GitHub Actions](https://github.com/Hafidh1989/automation-playground/actions/workflows/web-playwright.yml)
 
-- **Mobile testing**
+- **Mobile testing** *(planned)*
   - Android app automation
   - UI interaction testing
   - Functional flow validation
