@@ -19,11 +19,11 @@ This repository showcases end-to-end automation skills across multiple platforms
 This repository is designed to demonstrate automation coverage for:
 
 - **API testing** *(in progress)*
-  - Endpoint validation
-  - Response schema validation
-  - Authentication flows
+  - User endpoint validation
+  - Authentication testing
+  - Response schema validation using Pydantic
   - Negative test cases
-  - Data-driven testing
+  ▶️ [Run API tests via GitHub Actions](https://github.com/Hafidh1989/automation-playground/actions/workflows/api-pytest.yml)
 
 - **Web testing**
   - UI validation
