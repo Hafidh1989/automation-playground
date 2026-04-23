@@ -47,3 +47,11 @@ class DummyJsonClient:
             headers=self.default_headers,
             timeout=30,
         )
+    
+    def add_product(self, payload: dict):
+        return requests.post(
+            f"{self.base_url}/products/add",
+            json=payload,
+            headers=self.default_headers,
+            timeout=30,
+        )
